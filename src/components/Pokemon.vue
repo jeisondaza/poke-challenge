@@ -6,26 +6,32 @@ const count = ref(1);
 const metaData = {};
 let endPoinr = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=5";
 
-const getPokemos = async (url) => {
+const getPokemons = async (url) => {
    const res = await fetch(url);
    const data = await res.json();
    metaData.count = data.count;
    metaData.next = data.next;
    metaData.prev = data.previous;
-   pokemons.value = data.results;
+   pokemons.value = await Promise.all(
+      data.results.map(async (pokemon) => {
+         const res = await fetch(pokemon.url);
+         const data = await res.json();
+         return data;
+      })
+   );
    loading.value = false;
 };
 
-getPokemos(endPoinr);
+getPokemons(endPoinr);
 
 const handleNext = () => {
    let url = metaData.next;
-   getPokemos(url);
+   getPokemons(url);
    count.value += 5;
 };
 const handlePrev = () => {
    let url = metaData.prev;
-   getPokemos(url);
+   getPokemons(url);
    count.value -= 5;
 };
 </script>
@@ -36,6 +42,12 @@ const handlePrev = () => {
    <button @click="handleNext">next</button>
    <p v-if="loading">Loading...</p>
    <article v-else>
-      <p v-for="(poke, index) in pokemons" :key="index">{{ poke.name }}</p>
+      <figure v-for="(poke, index) in pokemons" :key="index">
+         <figcaption>{{ poke.name }}</figcaption>
+         <img
+            :src="poke.sprites.other.dream_world.front_default"
+            :alt="poke.name"
+         />
+      </figure>
    </article>
 </template>

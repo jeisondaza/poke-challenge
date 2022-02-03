@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from "vue";
+import { ref } from "vue";
 const pokemons = ref([]);
 const loading = ref(true);
 const count = ref(1);
@@ -42,12 +42,12 @@ const handlePrev = () => {
    <button @click="handleNext">next</button>
    <p v-if="loading">Loading...</p>
    <article v-else>
-      <figure v-for="(poke, index) in pokemons" :key="index">
+      <router-link to="/pokemon" v-for="(poke, index) in pokemons" :key="index">
          <figcaption>{{ poke.name }}</figcaption>
          <img
             :src="poke.sprites.other.dream_world.front_default"
             :alt="poke.name"
          />
-      </figure>
+      </router-link>
    </article>
 </template>

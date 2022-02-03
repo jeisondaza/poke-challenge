@@ -42,12 +42,14 @@ const handlePrev = () => {
    <button @click="handleNext">next</button>
    <p v-if="loading">Loading...</p>
    <article v-else>
-      <router-link to="/pokemon" v-for="(poke, index) in pokemons" :key="index">
-         <figcaption>{{ poke.name }}</figcaption>
-         <img
-            :src="poke.sprites.other.dream_world.front_default"
-            :alt="poke.name"
-         />
-      </router-link>
+      <div v-for="(poke, index) in pokemons" :key="index">
+         <router-link :to="poke.name">
+            <figcaption>{{ poke.name }}</figcaption>
+            <img
+               :src="poke.sprites.other.dream_world.front_default"
+               :alt="poke.name"
+            />
+         </router-link>
+      </div>
    </article>
 </template>

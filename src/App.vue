@@ -1,11 +1,11 @@
 <script setup>
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import Pokemons from "./components/Pokemons.vue";
+import Pokemon from "./components/Pokemon.vue";
 </script>
 
 <template>
-   <Pokemons />
+   <Pokemon />
 </template>
 
 <style>

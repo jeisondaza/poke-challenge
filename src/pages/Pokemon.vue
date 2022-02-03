@@ -1,9 +1,10 @@
 <script setup>
 import { useRoute } from "vue-router";
+import PokeDetails from "../components/PokeDetails.vue";
 const route = useRoute();
 </script>
 
 <template>
    <h1>Pokemon Page</h1>
-   <p>Ya tenesmo a {{ route.params.pokemon }}</p>
+   <PokeDetails :pokeName="route.params.pokemon" />
 </template>

@@ -22,12 +22,11 @@ const pagination = computed(() => parseInt(pageCount.value));
 
 <template>
    <header class="pokemos_header">
-      <h1 class="home_title">PokeApp</h1>
       <nav class="home_nav">
-         <p>
+         <h2 class="home_pag">
             {{ pagination + 1 }} to {{ pagination + 5 }} of
             {{ metaData.count }}
-         </p>
+         </h2>
          <div class="home_btns">
             <button
                class="primary_btns"
@@ -61,14 +60,13 @@ const pagination = computed(() => parseInt(pageCount.value));
    align-items: center;
    gap: var(--s-gap);
 }
-.home_title {
-   color: var(--accent-color);
-   font-size: var(--l-title);
-}
 .home_btns {
    display: flex;
    justify-content: space-evenly;
    gap: var(--m-gap);
+}
+.home_pag {
+   font-weight: normal;
 }
 .pokemons_container {
    display: flex;

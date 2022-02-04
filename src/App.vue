@@ -4,7 +4,11 @@
 </script>
 
 <template>
-   <router-link :to="{ name: 'Home' }">homeLogo</router-link>
+   <nav class="navBar">
+      <router-link :to="{ name: 'Home' }">
+         <img class="logo" src="./assets/pokeApp.png" alt="logo" />
+      </router-link>
+   </nav>
    <main class="view__container">
       <router-view></router-view>
    </main>
@@ -14,13 +18,21 @@
 #app {
    background-color: var(--light-bg-color);
    color: var(--light-text-color);
-   padding: var(--s-padding);
    width: 100%;
    min-height: 100vh;
 }
+.navBar {
+   background-color: var(--accent-color);
+}
 .view__container {
+   padding: var(--s-padding);
    display: flex;
    flex-direction: column;
    align-content: center;
+}
+.logo {
+   padding: var(--s-padding);
+   width: 160px;
+   filter: drop-shadow(1px 1px 2px #3a3a3a);
 }
 </style>

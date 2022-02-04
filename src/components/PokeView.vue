@@ -7,9 +7,9 @@ const props = defineProps({
 
 <template>
    <router-link :to="name">
-      <h2 class="poke_name">{{ name }}</h2>
       <figure class="poke_card">
          <img class="poke_avatar" :src="avatar" :alt="name" />
+         <h2 class="poke_name">{{ name }}</h2>
       </figure>
    </router-link>
 </template>
@@ -19,25 +19,21 @@ router-link {
    text-decoration: none;
 }
 .poke_card {
-   padding: var(--s-padding);
-   background-color: #e2d199;
-   border-bottom-left-radius: 10px;
-   border-bottom-right-radius: 10px;
+   background: radial-gradient(circle, #c84b31 0%, #2d4263 100%);
    display: flex;
    flex-direction: column;
    justify-content: center;
+   border-radius: 10px;
 }
 .poke_name {
-   border-top-left-radius: 10px;
-   border-top-right-radius: 10px;
    background-color: white;
    padding: var(--s-padding);
    color: var(--accent-color);
-   display: inline-block;
-   width: 100%;
-   text-decoration: none;
+   border-bottom-left-radius: 10px;
+   border-bottom-right-radius: 10px;
 }
 .poke_avatar {
+   padding: var(--s-padding);
    width: 100%;
    height: 300px;
 }

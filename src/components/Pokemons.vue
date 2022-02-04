@@ -3,6 +3,7 @@ import { useRoute } from "vue-router";
 import { computed } from "vue";
 import useGetPokemons from "../hooks/useGetPokemons.js";
 import usePagination from "../hooks/usePagination.js";
+import PokeView from "./PokeView.vue";
 
 const route = useRoute();
 const offset = parseInt(route.query.offset) || 0;
@@ -20,20 +21,58 @@ const pagination = computed(() => parseInt(pageCount.value));
 </script>
 
 <template>
-   <h2>PokeChanllenge</h2>
-   <p>
-      {{ pagination + 1 }} to {{ pagination + 5 }} of
-      {{ metaData.count }}
-   </p>
-   <button @click="handlePrev" v-show="metaData.prev">Back</button>
-   <button @click="handleNext">Next</button>
+   <header class="pokemos_header">
+      <h1 class="home_title">PokeApp</h1>
+      <nav class="home_nav">
+         <p>
+            {{ pagination + 1 }} to {{ pagination + 5 }} of
+            {{ metaData.count }}
+         </p>
+         <div class="home_btns">
+            <button
+               class="primary_btns"
+               @click="handlePrev"
+               v-show="metaData.prev"
+            >
+               Back
+            </button>
+            <button class="primary_btns" @click="handleNext">Next</button>
+         </div>
+      </nav>
+   </header>
    <p v-if="loading">Loading...</p>
-   <article v-else>
+   <article v-else class="pokemons_container">
       <div v-for="(poke, index) in pokemons" :key="index">
-         <router-link :to="poke.name">
-            <figcaption>{{ poke.name }}</figcaption>
-            <img :src="poke.avatar" :alt="poke.name" />
-         </router-link>
+         <PokeView :name="poke.name" :avatar="poke.avatar" />
       </div>
    </article>
 </template>
+
+<style>
+.pokemos_header {
+   margin-block: var(--s-margin);
+   display: flex;
+   flex-direction: column;
+   gap: var(--s-gap);
+}
+.home_nav {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: var(--s-gap);
+}
+.home_title {
+   color: var(--accent-color);
+   font-size: var(--l-title);
+}
+.home_btns {
+   display: flex;
+   justify-content: space-evenly;
+   gap: var(--m-gap);
+}
+.pokemons_container {
+   display: flex;
+   flex-direction: column;
+   gap: var(--s-gap);
+}
+</style>

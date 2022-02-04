@@ -5,18 +5,22 @@
 
 <template>
    <router-link :to="{ name: 'Home' }">homeLogo</router-link>
-   <main>
+   <main class="view__container">
       <router-view></router-view>
    </main>
 </template>
 
 <style>
 #app {
-   font-family: Avenir, Helvetica, Arial, sans-serif;
-   -webkit-font-smoothing: antialiased;
-   -moz-osx-font-smoothing: grayscale;
-   text-align: center;
-   color: #2c3e50;
-   margin-top: 60px;
+   background-color: var(--light-bg-color);
+   color: var(--light-text-color);
+   padding: var(--s-padding);
+   width: 100%;
+   min-height: 100vh;
+}
+.view__container {
+   display: flex;
+   flex-direction: column;
+   align-content: center;
 }
 </style>

@@ -26,9 +26,6 @@
 }
 .view__container {
    padding: var(--s-padding);
-   display: flex;
-   flex-direction: column;
-   align-content: center;
 }
 .logo {
    padding: var(--s-padding);

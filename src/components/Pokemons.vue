@@ -49,7 +49,7 @@ const pagination = computed(() => parseInt(pageCount.value));
 
 <style>
 .pokemos_header {
-   margin-block: var(--s-margin);
+   margin-block: var(--m-margin);
    display: flex;
    flex-direction: column;
    gap: var(--s-gap);

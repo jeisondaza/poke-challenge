@@ -9,7 +9,9 @@
    --m-padding: 1.5rem;
    --l-padding: 2.5rem;
 
-   --s-margin: 1rem;
+   --s-margin: 0.5rem;
+   --m-margin: 1.5rem;
+   --l-margin: 2.5rem;
 
    --l-title: 3rem;
 
@@ -31,8 +33,13 @@ html {
    margin: 0;
    padding: 0;
 }
+
 a {
    text-decoration: none;
+}
+
+ul {
+   list-style: none;
 }
 
 .primary_btns {

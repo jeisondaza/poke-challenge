@@ -5,7 +5,7 @@ export default function useGetPokemonDetails(pokemon) {
       name: "",
       description: "",
       avatar: "",
-      types: [],
+      type: "",
       abilities: [],
       height: 0,
       weight: 0,
@@ -21,7 +21,7 @@ export default function useGetPokemonDetails(pokemon) {
       const data = await res.json();
       poke.name = data.name;
       poke.avatar = data.sprites.other.dream_world.front_default;
-      poke.types = data.types.map((el) => el.type.name);
+      poke.type = data.types[0].type.name;
       poke.abilities = data.abilities.map((el) => el.ability.name);
       poke.height = data.height;
       poke.weight = data.weight;
@@ -33,7 +33,11 @@ export default function useGetPokemonDetails(pokemon) {
    const getSpecieDetails = async (url) => {
       const res = await fetch(url);
       const data = await res.json();
-      poke.description = data.flavor_text_entries[2].flavor_text;
+      let clearStr = data.flavor_text_entries[2].flavor_text.replace(
+         /\n|\r|\f/g,
+         " "
+      );
+      poke.description = clearStr;
    };
 
    const getAllData = () => {

@@ -33,7 +33,6 @@ const getSingleDetails = async (url) => {
       type: el.stat.name,
       value: el.base_stat,
    }));
-   console.log(poke.description);
 };
 const getSpecieDetails = async (url) => {
    const res = await fetch(url);

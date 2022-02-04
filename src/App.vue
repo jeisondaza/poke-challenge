@@ -4,7 +4,7 @@
 </script>
 
 <template>
-   <router-link to="/">homeLogo</router-link>
+   <router-link :to="{ name: 'Home' }">homeLogo</router-link>
    <main>
       <router-view></router-view>
    </main>

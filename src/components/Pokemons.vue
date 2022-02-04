@@ -1,54 +1,38 @@
 <script setup>
-import { ref } from "vue";
-const pokemons = ref([]);
-const loading = ref(true);
-const count = ref(1);
-const metaData = {};
-let endPoinr = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=5";
+import { useRoute } from "vue-router";
+import { computed } from "vue";
+import useGetPokemons from "../hooks/useGetPokemons.js";
+import usePagination from "../hooks/usePagination.js";
 
-const getPokemons = async (url) => {
-   const res = await fetch(url);
-   const data = await res.json();
-   metaData.count = data.count;
-   metaData.next = data.next;
-   metaData.prev = data.previous;
-   pokemons.value = await Promise.all(
-      data.results.map(async (pokemon) => {
-         const res = await fetch(pokemon.url);
-         const data = await res.json();
-         return data;
-      })
-   );
-   loading.value = false;
-};
-
-getPokemons(endPoinr);
-
-const handleNext = () => {
-   let url = metaData.next;
-   getPokemons(url);
-   count.value += 5;
-};
-const handlePrev = () => {
-   let url = metaData.prev;
-   getPokemons(url);
-   count.value -= 5;
-};
+const route = useRoute();
+const offset = parseInt(route.query.offset) || 0;
+const limit = 5;
+const { pokemons, metaData, loading, getPokemons } = useGetPokemons(
+   offset,
+   limit
+);
+const { pageCount, handleNext, handlePrev } = usePagination(
+   getPokemons,
+   offset,
+   limit
+);
+const pagination = computed(() => parseInt(pageCount.value));
 </script>
+
 <template>
    <h2>PokeChanllenge</h2>
-   <p>from {{ count }} to {{ count + 4 }} of {{ metaData.count }}</p>
-   <button v-show="metaData.prev" @click="handlePrev">prev</button>
-   <button @click="handleNext">next</button>
+   <p>
+      {{ pagination + 1 }} to {{ pagination + 5 }} of
+      {{ metaData.count }}
+   </p>
+   <button @click="handlePrev" v-show="metaData.prev">Back</button>
+   <button @click="handleNext">Next</button>
    <p v-if="loading">Loading...</p>
    <article v-else>
       <div v-for="(poke, index) in pokemons" :key="index">
          <router-link :to="poke.name">
             <figcaption>{{ poke.name }}</figcaption>
-            <img
-               :src="poke.sprites.other.dream_world.front_default"
-               :alt="poke.name"
-            />
+            <img :src="poke.avatar" :alt="poke.name" />
          </router-link>
       </div>
    </article>

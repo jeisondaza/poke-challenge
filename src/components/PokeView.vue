@@ -31,10 +31,16 @@ router-link {
    color: var(--accent-color);
    border-bottom-left-radius: 10px;
    border-bottom-right-radius: 10px;
+   text-align: center;
 }
 .poke_avatar {
    padding: var(--s-padding);
    width: 100%;
    height: 300px;
+}
+@media screen and (min-width: 400px) {
+   .poke_card {
+      width: 400px;
+   }
 }
 </style>

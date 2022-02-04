@@ -25,7 +25,9 @@
    background-color: var(--accent-color);
 }
 .view__container {
-   padding: var(--s-padding);
+   padding-inline: var(--s-padding);
+   display: flex;
+   justify-content: center;
 }
 .logo {
    padding: var(--s-padding);

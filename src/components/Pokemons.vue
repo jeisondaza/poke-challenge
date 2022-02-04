@@ -21,29 +21,31 @@ const pagination = computed(() => parseInt(pageCount.value));
 </script>
 
 <template>
-   <header class="pokemos_header">
-      <nav class="home_nav">
-         <h2 class="home_pag">
-            {{ pagination + 1 }} to {{ pagination + 5 }} of
-            {{ metaData.count }}
-         </h2>
-         <div class="home_btns">
-            <button
-               class="primary_btns"
-               @click="handlePrev"
-               v-show="metaData.prev"
-            >
-               Back
-            </button>
-            <button class="primary_btns" @click="handleNext">Next</button>
-         </div>
-      </nav>
-   </header>
    <p v-if="loading">Loading...</p>
    <article v-else class="pokemons_container">
-      <div v-for="(poke, index) in pokemons" :key="index">
-         <PokeView :name="poke.name" :avatar="poke.avatar" />
-      </div>
+      <header class="pokemos_header">
+         <nav class="home_nav">
+            <h2 class="home_pag">
+               {{ pagination + 1 }} to {{ pagination + 5 }} of
+               {{ metaData.count }}
+            </h2>
+            <div class="home_btns">
+               <button
+                  class="primary_btns"
+                  @click="handlePrev"
+                  v-show="metaData.prev"
+               >
+                  Back
+               </button>
+               <button class="primary_btns" @click="handleNext">Next</button>
+            </div>
+         </nav>
+      </header>
+      <section class="pokemons_view">
+         <div v-for="(poke, index) in pokemons" :key="index">
+            <PokeView :name="poke.name" :avatar="poke.avatar" />
+         </div>
+      </section>
    </article>
 </template>
 
@@ -52,7 +54,6 @@ const pagination = computed(() => parseInt(pageCount.value));
    margin-block: var(--m-margin);
    display: flex;
    flex-direction: column;
-   gap: var(--s-gap);
 }
 .home_nav {
    display: flex;
@@ -71,6 +72,22 @@ const pagination = computed(() => parseInt(pageCount.value));
 .pokemons_container {
    display: flex;
    flex-direction: column;
+}
+.pokemons_view {
+   display: flex;
+   flex-direction: column;
    gap: var(--s-gap);
+}
+@media screen and (min-width: 450px) {
+   .pokemons_container {
+      flex-wrap: wrap;
+   }
+}
+@media screen and (min-width: 1000px) {
+   .pokemons_view {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+   }
 }
 </style>

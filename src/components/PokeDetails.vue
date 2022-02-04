@@ -44,10 +44,10 @@ const { poke, loading } = useGetPokemonDetails(props.pokeName);
 <style>
 .poke_container {
    border-radius: 10px;
-   /* padding: var(--s-padding); */
    display: flex;
    flex-direction: column;
    box-shadow: 5px 5px 15px #3b3b3b;
+   margin-block: var(--l-padding);
 }
 .poke_img-container {
    border-top-left-radius: 10px;
@@ -77,6 +77,11 @@ const { poke, loading } = useGetPokemonDetails(props.pokeName);
 }
 .poke_title {
    text-align: center;
+}
+@media screen and (min-width: 400px) {
+   .poke_container {
+      width: 400px;
+   }
 }
 
 .normal {

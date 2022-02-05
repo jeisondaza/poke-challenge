@@ -1,9 +1,10 @@
 <script setup>
 import { useRoute } from "vue-router";
-import { computed } from "vue";
+import { computed, watch } from "vue";
 import useGetPokemons from "../hooks/useGetPokemons.js";
 import usePagination from "../hooks/usePagination.js";
 import PokeView from "./PokeView.vue";
+import PaginationBottons from "./PaginationBottons.vue";
 
 const route = useRoute();
 const offset = parseInt(route.query.offset) || 0;
@@ -12,12 +13,19 @@ const { pokemons, metaData, loading, getPokemons } = useGetPokemons(
    offset,
    limit
 );
-const { pageCount, handleNext, handlePrev } = usePagination(
-   getPokemons,
-   offset,
-   limit
-);
+const { pageCount, handleNext, handlePrev, lastPage, firstPage, goHome } =
+   usePagination(getPokemons, offset, limit, metaData.count);
 const pagination = computed(() => parseInt(pageCount.value));
+
+const reset = () => {
+   if (route.fullPath == "/") {
+      getPokemons();
+      goHome();
+   }
+   console.log(route.query.offset);
+};
+
+watch(() => route.fullPath, reset);
 </script>
 
 <template>
@@ -30,14 +38,28 @@ const pagination = computed(() => parseInt(pageCount.value));
                {{ metaData.count }}
             </h2>
             <div class="home_btns">
-               <button
-                  class="primary_btns"
+               <PaginationBottons
+                  text="First"
+                  @click="firstPage"
+                  outline
+                  v-show="metaData.prev"
+               />
+               <PaginationBottons
+                  text="Prev"
                   @click="handlePrev"
                   v-show="metaData.prev"
-               >
-                  Back
-               </button>
-               <button class="primary_btns" @click="handleNext">Next</button>
+               />
+               <PaginationBottons
+                  text="Next"
+                  @click="handleNext"
+                  v-show="metaData.next"
+               />
+               <PaginationBottons
+                  text="Last"
+                  @click="lastPage"
+                  outline
+                  v-show="metaData.next"
+               />
             </div>
          </nav>
       </header>

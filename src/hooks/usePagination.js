@@ -9,7 +9,7 @@ export default function usePagination(getFunction, offset, limit) {
       router.push({
          path: "/",
          query: {
-            offset: offset,
+            offset,
          },
       });
       pageCount.value = offset;
@@ -29,5 +29,34 @@ export default function usePagination(getFunction, offset, limit) {
       handleRoute();
    };
 
-   return { pageCount, handleNext, handlePrev };
+   const lastPage = () => {
+      let final = 1118 - limit;
+      getFunction(
+         `https://pokeapi.co/api/v2/pokemon?offset=${final}&limit=${limit}`
+      );
+      offset = final;
+      handleRoute();
+   };
+
+   const firstPage = () => {
+      goHome();
+      getFunction(
+         `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`
+      );
+      handleRoute();
+   };
+
+   const goHome = () => {
+      offset = 0;
+      handleRoute();
+   };
+
+   return {
+      pageCount,
+      handleNext,
+      handlePrev,
+      lastPage,
+      firstPage,
+      goHome,
+   };
 }

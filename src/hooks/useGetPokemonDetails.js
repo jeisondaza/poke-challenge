@@ -20,8 +20,11 @@ export default function useGetPokemonDetails(pokemon) {
       const res = await fetch(url);
       const data = await res.json();
       poke.name = data.name;
-      poke.avatar = data.sprites.other.dream_world.front_default;
-      poke.type = data.types[0].type.name;
+      (poke.avatar =
+         data.sprites.other.dream_world.front_default ||
+         data.sprites.other["official-artwork"].front_default ||
+         data.sprites.other.home.front_default),
+         (poke.type = data.types[0].type.name);
       poke.abilities = data.abilities.map((el) => el.ability.name);
       poke.height = data.height;
       poke.weight = data.weight;

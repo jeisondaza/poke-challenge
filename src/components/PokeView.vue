@@ -37,6 +37,7 @@ router-link {
    padding: var(--s-padding);
    width: 100%;
    height: 300px;
+   object-fit: contain;
 }
 @media screen and (min-width: 400px) {
    .poke_card {

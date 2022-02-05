@@ -13,7 +13,7 @@ const { poke, loading } = useGetPokemonDetails(props.pokeName);
       <div class="poke_img-container" :class="poke.type">
          <img :src="poke.avatar" :alt="poke.name" class="poke_img" />
       </div>
-      <figcaprion class="poke_details">
+      <figcaption class="poke_details">
          <p class="poke_type">{{ poke.type }}</p>
          <h2 class="poke_title">{{ poke.name.toUpperCase() }}</h2>
          <p>{{ poke.description }}</p>
@@ -37,7 +37,7 @@ const { poke, loading } = useGetPokemonDetails(props.pokeName);
                </li>
             </ul>
          </section>
-      </figcaprion>
+      </figcaption>
    </figure>
 </template>
 
@@ -105,7 +105,7 @@ const { poke, loading } = useGetPokemonDetails(props.pokeName);
 .fighting {
    background: linear-gradient(90deg, #644125 0%, #f8a232 100%);
 }
-.posion {
+.poison {
    background: linear-gradient(90deg, #632549 0%, #eb56a8 100%);
 }
 .ground {

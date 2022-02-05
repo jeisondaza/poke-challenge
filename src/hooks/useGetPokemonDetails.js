@@ -3,8 +3,8 @@ import { ref, reactive } from "vue";
 export default function useGetPokemonDetails(pokemon) {
    const poke = reactive({
       name: "",
-      description: "",
       avatar: "",
+      description: "",
       type: "",
       abilities: [],
       height: 0,

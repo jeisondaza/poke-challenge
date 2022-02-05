@@ -1,19 +1,11 @@
 <script setup>
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
+import AppBar from "./components/AppBar.vue";
 </script>
 
 <template>
-   <nav class="navBar">
-      <router-link :to="{ name: 'Home' }">
-         <img class="logo" src="./assets/pokeApp.png" alt="logo" />
-      </router-link>
-      <label for="locale">locale</label>
-      <select name="locale">
-         <option selected>EN</option>
-         <option>ES</option>
-      </select>
-   </nav>
+   <AppBar />
    <main class="view__container">
       <router-view></router-view>
    </main>
@@ -26,17 +18,10 @@
    width: 100%;
    min-height: 100vh;
 }
-.navBar {
-   background-color: var(--accent-color);
-}
 .view__container {
    padding-inline: var(--s-padding);
    display: flex;
-   justify-content: center;
-}
-.logo {
-   padding: var(--s-padding);
-   width: 160px;
-   filter: drop-shadow(1px 1px 2px #3a3a3a);
+   flex-direction: column;
+   align-items: center;
 }
 </style>

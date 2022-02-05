@@ -1,0 +1,32 @@
+{
+   "messages": {
+      "en": {
+         "label": "Language",
+         "counter": "{0} to {1} of {2}",
+         "bottons": {
+            "first": "First",
+            "prev": "Previous",
+            "next": "Next",
+            "last": "Last"
+         },
+         "height": "height",
+         "weight": "weight",
+         "abilities": "Abilities",
+         "stats": "Stats"
+      },
+      "es": {
+         "label": "Idioma",
+         "counter": "{0} al {1} de {2}",
+         "bottons": {
+            "first": "Inicio",
+            "prev": "Anterior",
+            "next": "Siguiente",
+            "last": "Final"
+         },
+         "height": "altura",
+         "weight": "peso",
+         "abilities": "Habilidades",
+         "stats": "Estadísticas"
+      }
+   }
+}

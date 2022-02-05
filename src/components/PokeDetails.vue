@@ -1,15 +1,18 @@
 <script setup>
 import useGetPokemonDetails from "../hooks/useGetPokemonDetails.js";
-import Lang from "./Lang.vue";
+import { ref, watch, watchEffect } from "vue";
+import { useI18n } from "vue-i18n";
 
 const props = defineProps({
    pokeName: String,
 });
 const { poke, loading } = useGetPokemonDetails(props.pokeName);
+const { t, locale } = useI18n();
+
+// watchEffect(() => console.log(locale.value));
 </script>
 
 <template>
-   <Lang />
    <p v-if="loading">Loading....</p>
    <figure v-else class="poke_container">
       <div class="poke_img-container" :class="poke.type">
@@ -25,11 +28,11 @@ const { poke, loading } = useGetPokemonDetails(props.pokeName);
          <h2 class="poke_title">{{ poke.name.toUpperCase() }}</h2>
          <p>{{ poke.description }}</p>
          <section class="poke_sizes">
-            <p>height {{ poke.height / 10 }} m</p>
-            <p>weight {{ poke.weight / 10 }} kg</p>
+            <p>{{ t("height") }} {{ poke.height / 10 }} m</p>
+            <p>{{ t("weight") }} {{ poke.weight / 10 }} kg</p>
          </section>
          <section class="poke_abilities">
-            <h3>Abilities</h3>
+            <h3>{{ t("abilities") }}</h3>
             <ul>
                <li v-for="(ability, index) in poke.abilities" :key="index">
                   {{ ability }}
@@ -37,7 +40,7 @@ const { poke, loading } = useGetPokemonDetails(props.pokeName);
             </ul>
          </section>
          <section class="poke_stats">
-            <h3>Stats</h3>
+            <h3>{{ t("stats") }}</h3>
             <ul>
                <li v-for="(stat, index) in poke.stats" :key="index">
                   {{ stat.type }} : {{ stat.value }}

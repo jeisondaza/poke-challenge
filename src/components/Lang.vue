@@ -1,14 +1,9 @@
 <template>
+   <p>{{ t("msg") }}</p>
    <p>{{ t("named", { msg }) }}</p>
    <p>{{ t("list", [msg, msg2]) }}</p>
    <p>{{ t("literal") }}</p>
    <p>{{ t("linked") }}</p>
-
-   <label for="locale">locale</label>
-   <select v-model="locale">
-      <option>en</option>
-      <option>ja</option>
-   </select>
 </template>
 
 <script setup>
@@ -21,7 +16,7 @@ const { t, locale } = useI18n({
          msg: "hola",
          named: "{msg} world!",
          list: "{1} world! lista",
-         literal: "{'heXD'} world!",
+         literal: "{'hello'} world!",
          the_world: "the mundoli",
          dio: "DIO:",
          linked: "@:dio @:the_world XD!!!!",

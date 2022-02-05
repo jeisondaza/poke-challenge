@@ -8,7 +8,7 @@ const props = defineProps({
 <template>
    <router-link :to="name">
       <figure class="poke_card">
-         <img class="poke_avatar" :src="avatar" :alt="name" />
+         <img class="poke_avatar" :src="avatar" :alt="name" decoding="async" />
          <h2 class="poke_name">{{ name }}</h2>
       </figure>
    </router-link>

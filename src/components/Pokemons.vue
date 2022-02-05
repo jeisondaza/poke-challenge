@@ -14,7 +14,7 @@ const { pokemons, metaData, loading, getPokemons } = useGetPokemons(
    limit
 );
 const { pageCount, handleNext, handlePrev, lastPage, firstPage, goHome } =
-   usePagination(getPokemons, offset, limit, metaData.count);
+   usePagination(getPokemons, offset, limit);
 const pagination = computed(() => parseInt(pageCount.value));
 
 const reset = () => {
@@ -22,7 +22,6 @@ const reset = () => {
       getPokemons();
       goHome();
    }
-   console.log(route.query.offset);
 };
 
 watch(() => route.fullPath, reset);
@@ -34,7 +33,7 @@ watch(() => route.fullPath, reset);
       <header class="pokemos_header">
          <nav class="home_nav">
             <h2 class="home_pag">
-               {{ pagination + 1 }} to {{ pagination + 5 }} of
+               {{ pagination + 1 }} to {{ pagination + limit }} of
                {{ metaData.count }}
             </h2>
             <div class="home_btns">

@@ -1,5 +1,6 @@
 <script setup>
 import useGetPokemonDetails from "../hooks/useGetPokemonDetails.js";
+import Lang from "./Lang.vue";
 
 const props = defineProps({
    pokeName: String,
@@ -8,10 +9,16 @@ const { poke, loading } = useGetPokemonDetails(props.pokeName);
 </script>
 
 <template>
+   <Lang />
    <p v-if="loading">Loading....</p>
    <figure v-else class="poke_container">
       <div class="poke_img-container" :class="poke.type">
-         <img :src="poke.avatar" :alt="poke.name" class="poke_img" />
+         <img
+            :src="poke.avatar"
+            :alt="poke.name"
+            class="poke_img"
+            decoding="async"
+         />
       </div>
       <figcaption class="poke_details">
          <p class="poke_type">{{ poke.type }}</p>

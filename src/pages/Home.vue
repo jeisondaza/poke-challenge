@@ -4,5 +4,3 @@ import Pokemons from "../components/Pokemons.vue";
 <template>
    <Pokemons />
 </template>
-
-<style></style>

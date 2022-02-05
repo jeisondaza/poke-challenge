@@ -8,6 +8,11 @@
       <router-link :to="{ name: 'Home' }">
          <img class="logo" src="./assets/pokeApp.png" alt="logo" />
       </router-link>
+      <label for="locale">locale</label>
+      <select name="locale">
+         <option selected>EN</option>
+         <option>ES</option>
+      </select>
    </nav>
    <main class="view__container">
       <router-view></router-view>

@@ -6,14 +6,18 @@ export default function useGetPokemons(offset, limit) {
    const loading = ref(false);
    const metaData = reactive({
       count: 0,
+      next: null,
       prev: null,
    });
 
-   const getPokemons = async (url) => {
+   const getPokemons = async (
+      url = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=5"
+   ) => {
       loading.value = true;
       const res = await fetch(url);
       const data = await res.json();
       metaData.count = data.count;
+      metaData.next = data.next;
       metaData.prev = data.previous;
       pokemons.value = await Promise.all(
          data.results.map(async (pokemon) => {
@@ -21,7 +25,10 @@ export default function useGetPokemons(offset, limit) {
             const data = await res.json();
             return {
                name: data.name,
-               avatar: data.sprites.other.dream_world.front_default,
+               avatar:
+                  data.sprites.other.dream_world.front_default ||
+                  data.sprites.other["official-artwork"].front_default ||
+                  data.sprites.other.home.front_default,
             };
          })
       );

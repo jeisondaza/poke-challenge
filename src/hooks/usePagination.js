@@ -19,6 +19,7 @@ export default function usePagination(getFunction, offset, limit) {
       getFunction(
          `https://pokeapi.co/api/v2/pokemon?offset=${(offset += 5)}&limit=${limit}`
       );
+      offset += 5;
       handleRoute();
    };
 

@@ -1,8 +1,11 @@
 <script setup>
 import { useRoute } from "vue-router";
 import { computed, watch } from "vue";
+import { useI18n } from "vue-i18n";
+
 import useGetPokemons from "../hooks/useGetPokemons.js";
 import usePagination from "../hooks/usePagination.js";
+
 import PokeView from "./PokeView.vue";
 import PaginationBottons from "./PaginationBottons.vue";
 
@@ -23,6 +26,7 @@ const reset = () => {
       goHome();
    }
 };
+const { t } = useI18n();
 
 watch(() => route.fullPath, reset);
 </script>
@@ -33,28 +37,33 @@ watch(() => route.fullPath, reset);
       <header class="pokemos_header">
          <nav class="home_nav">
             <h2 class="home_pag">
-               {{ pagination + 1 }} to {{ pagination + limit }} of
-               {{ metaData.count }}
+               {{
+                  t("counter", [
+                     pagination + 1,
+                     pagination + limit,
+                     metaData.count,
+                  ])
+               }}
             </h2>
             <div class="home_btns">
                <PaginationBottons
-                  text="First"
+                  :text="t('bottons.first')"
                   @click="firstPage"
                   outline
                   v-show="metaData.prev"
                />
                <PaginationBottons
-                  text="Prev"
+                  :text="t('bottons.prev')"
                   @click="handlePrev"
                   v-show="metaData.prev"
                />
                <PaginationBottons
-                  text="Next"
+                  :text="t('bottons.next')"
                   @click="handleNext"
                   v-show="metaData.next"
                />
                <PaginationBottons
-                  text="Last"
+                  :text="t('bottons.last')"
                   @click="lastPage"
                   outline
                   v-show="metaData.next"

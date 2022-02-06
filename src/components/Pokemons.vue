@@ -8,6 +8,7 @@ import usePagination from "../hooks/usePagination.js";
 
 import PokeView from "./PokeView.vue";
 import PaginationBottons from "./PaginationBottons.vue";
+import Loading from "./Loader.vue";
 
 const route = useRoute();
 const offset = parseInt(route.query.offset) || 0;
@@ -32,7 +33,7 @@ watch(() => route.fullPath, reset);
 </script>
 
 <template>
-   <p v-if="loading">Loading...</p>
+   <Loading v-if="loading" />
    <article v-else class="pokemons_container">
       <header class="pokemos_header">
          <nav class="home_nav">
@@ -47,23 +48,23 @@ watch(() => route.fullPath, reset);
             </h2>
             <div class="home_btns">
                <PaginationBottons
-                  :text="t('bottons.first')"
+                  text="<<"
                   @click="firstPage"
                   outline
                   v-show="metaData.prev"
                />
                <PaginationBottons
-                  :text="t('bottons.prev')"
+                  text="<"
                   @click="handlePrev"
                   v-show="metaData.prev"
                />
                <PaginationBottons
-                  :text="t('bottons.next')"
+                  text=">"
                   @click="handleNext"
                   v-show="metaData.next"
                />
                <PaginationBottons
-                  :text="t('bottons.last')"
+                  text=">>"
                   @click="lastPage"
                   outline
                   v-show="metaData.next"
@@ -94,7 +95,7 @@ watch(() => route.fullPath, reset);
 .home_btns {
    display: flex;
    justify-content: space-evenly;
-   gap: var(--m-gap);
+   gap: var(--s-gap);
 }
 .home_pag {
    font-weight: normal;
@@ -102,6 +103,7 @@ watch(() => route.fullPath, reset);
 .pokemons_container {
    display: flex;
    flex-direction: column;
+   align-items: center;
 }
 .pokemons_view {
    display: flex;

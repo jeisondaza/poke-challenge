@@ -1,4 +1,5 @@
 import { ref, reactive } from "vue";
+import usePokeLocation from "./usePokeLocation";
 
 export default function useGetPokemonDetails(pokemon) {
    const poke = reactive({
@@ -15,26 +16,6 @@ export default function useGetPokemonDetails(pokemon) {
    });
    const loading = ref(false);
    const single = `https://pokeapi.co/api/v2/pokemon/${pokemon}/`;
-   const specie = `https://pokeapi.co/api/v2/pokemon-species/${pokemon}/`;
-
-   const helperFetch = async (url, lang) => {
-      const res = await fetch(url);
-      const data = await res.json();
-      const selected = data.names
-         .filter((el) => el.language.name == lang)
-         .map((option) => option.name)
-         .toString();
-
-      return selected;
-   };
-   // fetch(url)
-   //    .then((res) => res.json())
-   //    .then((d) =>
-   //       d.names
-   //          .filter((el) => el.language.name == lang)
-   //          .map((option) => option.name)
-   //          .toString()
-   //    );
 
    const getFixedData = (data) => {
       poke.id = data.id;
@@ -47,9 +28,24 @@ export default function useGetPokemonDetails(pokemon) {
       poke.height = data.height;
       poke.weight = data.weight;
    };
+
    const getI18nData = async (lang) => {
       const res = await fetch(single);
       const data = await res.json();
+      const specie = `https://pokeapi.co/api/v2/pokemon-species/${data.species.name}/`;
+
+      poke.type = await usePokeLocation(data.types[0].type.url, lang);
+
+      poke.abilities = await Promise.all(
+         data.abilities.map((el) => usePokeLocation(el.ability.url, lang))
+      );
+
+      poke.stats = await Promise.all(
+         data.stats.map(async (el) => ({
+            type: await usePokeLocation(el.stat.url, lang),
+            value: el.base_stat,
+         }))
+      );
 
       poke.description = await fetch(specie)
          .then((res) => res.json())
@@ -60,19 +56,6 @@ export default function useGetPokemonDetails(pokemon) {
                .map((option) => option.flavor_text.replace(/\n|\r|\f/g, " "))
                .toString()
          );
-
-      poke.type = await helperFetch(data.types[0].type.url, lang);
-
-      poke.abilities = await Promise.all(
-         data.abilities.map((el) => helperFetch(el.ability.url, lang))
-      );
-
-      poke.stats = await Promise.all(
-         data.stats.map(async (el) => ({
-            type: await helperFetch(el.stat.url, lang),
-            value: el.base_stat,
-         }))
-      );
    };
 
    const getDetails = async () => {

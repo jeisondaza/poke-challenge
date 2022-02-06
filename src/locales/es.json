@@ -1,0 +1,10 @@
+{
+   "es": {
+      "label": "Idioma",
+      "counter": "{0} al {1} de {2}",
+      "height": "altura",
+      "weight": "peso",
+      "abilities": "Habilidades",
+      "stats": "Estadísticas"
+   }
+}

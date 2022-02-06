@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="392" y1="371" x2="392" y2="561.09" id="gradient-1" gradientTransform="matrix(0.294247, -0.95573, 1.292934, 0.398064, -328.537285, 642.332192)">
+      <stop offset="0" style="stop-color: rgb(231, 231, 231);"/>
+      <stop offset="1" style="stop-color: rgb(113, 113, 113);"/>
+    </linearGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="392" y1="180.91" x2="392" y2="371" id="gradient-0" gradientTransform="matrix(0.424774, -0.905299, 0.985825, 0.462557, 9.780751, 532.084962)">
+      <stop offset="0" style="stop-color: rgb(207, 21, 21);"/>
+      <stop offset="1" style="stop-color: rgba(75, 7, 7, 1)"/>
+    </linearGradient>
+  </defs>
+  <path style="stroke: rgb(0, 0, 0); stroke-width: 20.9462px; fill: url(#gradient-1);" transform="matrix(1.089181, 0, 0, 1.089181, -176.958954, -146.486237)" d="M 582.024 371 A 190.024 190.024 0 1 1 201.976 371 L 392 371 Z" bx:shape="pie 392 371 0 190.024 90 270 1@ca965357"/>
+  <path style="stroke: rgb(0, 0, 0); stroke-width: 20.9462px; fill: url(#gradient-0);" transform="matrix(1.089181, 0, 0, 1.089181, -176.958923, -161.68602)" d="M 201.976 371 A 190.024 190.024 0 1 1 582.024 371 L 392 371 Z" bx:shape="pie 392 371 0 190.024 270 90 1@718de559"/>
+  <ellipse style="stroke: rgb(0, 0, 0); stroke-width: 20px; fill: rgb(255, 255, 255);" cx="250" cy="250" rx="67.4" ry="67.4"/>
+</svg>

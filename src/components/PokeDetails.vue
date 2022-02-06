@@ -1,6 +1,6 @@
 <script setup>
 import useGetPokemonDetails from "../hooks/useGetPokemonDetails.js";
-import { watchEffect, watch } from "vue";
+import { watchEffect } from "vue";
 import { useI18n } from "vue-i18n";
 
 const props = defineProps({
@@ -10,7 +10,6 @@ const { t, locale } = useI18n();
 const { poke, getI18nData, loading } = useGetPokemonDetails(props.pokeName);
 
 watchEffect(() => {
-   locale.value;
    getI18nData(locale.value);
 });
 </script>

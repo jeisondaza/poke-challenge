@@ -1,7 +1,11 @@
 <script setup>
-import useGetPokemonDetails from "../hooks/useGetPokemonDetails.js";
 import { watchEffect } from "vue";
 import { useI18n } from "vue-i18n";
+
+import useGetPokemonDetails from "../hooks/useGetPokemonDetails.js";
+
+import Loader from "./Loader.vue";
+import ProgressBar from "./ProgressBar.vue";
 
 const props = defineProps({
    pokeName: String,
@@ -15,7 +19,7 @@ watchEffect(() => {
 </script>
 
 <template>
-   <p v-if="loading">Loading....</p>
+   <Loader v-if="loading" />
    <figure v-else class="poke_container">
       <div class="poke_img-container" :class="poke.typeBg">
          <img
@@ -41,11 +45,21 @@ watchEffect(() => {
                </li>
             </ul>
          </section>
+
          <section class="poke_stats">
             <h3>{{ t("stats") }}</h3>
-            <ul>
-               <li v-for="(stat, index) in poke.stats" :key="index">
-                  {{ stat.type }} : {{ stat.value }}
+            <ul class="stats_container">
+               <li
+                  v-for="(stat, index) in poke.stats"
+                  :key="index"
+                  class="stats_stat"
+               >
+                  <p class="stats_label">{{ stat.type }}</p>
+                  <ProgressBar
+                     :value="stat.value"
+                     :max="255"
+                     dir="horizontal"
+                  />
                </li>
             </ul>
          </section>
@@ -60,6 +74,7 @@ watchEffect(() => {
    flex-direction: column;
    box-shadow: 5px 5px 15px #3b3b3b;
    margin-block: var(--l-padding);
+   background-color: #ffffff;
 }
 .poke_img-container {
    border-top-left-radius: 10px;
@@ -69,15 +84,15 @@ watchEffect(() => {
 .poke_img {
    width: 100%;
 }
+.poke_title {
+   text-align: center;
+}
 .poke_details {
    position: relative;
    display: flex;
    flex-direction: column;
    gap: var(--s-gap);
-   background: #ffffff;
    padding: var(--m-padding);
-   border-bottom-left-radius: 10px;
-   border-bottom-right-radius: 10px;
 }
 .poke_type {
    position: absolute;
@@ -87,12 +102,54 @@ watchEffect(() => {
    top: -17px;
    left: 10px;
 }
-.poke_title {
-   text-align: center;
+.stats_container {
+   margin-block-start: var(--s-margin);
+   display: flex;
+   flex-direction: column;
+   gap: var(--s-gap);
 }
+
 @media screen and (min-width: 400px) {
    .poke_container {
       width: 400px;
+   }
+}
+@media screen and (min-width: 950px) {
+   .poke_container {
+      flex-direction: row;
+      width: 900px;
+   }
+   .poke_img-container {
+      border-radius: 0;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+      padding: var(--l-padding);
+      width: 40%;
+   }
+   .poke_img {
+      width: 100%;
+      height: 100%;
+   }
+   .poke_details {
+      width: 60%;
+      padding: var(--m-padding);
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+   }
+   .poke_type {
+      top: 0px;
+      left: 0px;
+   }
+}
+@media screen and (min-width: 1200px) {
+   .poke_container {
+      width: 1000px;
+   }
+}
+@media screen and (min-width: 1400px) {
+   .poke_container {
+      width: 1300px;
+      font-size: 22px;
    }
 }
 

@@ -16,7 +16,6 @@ export default function useGetPokemonDetails(pokemon) {
    });
    const loading = ref(false);
    const single = `https://pokeapi.co/api/v2/pokemon/${pokemon}/`;
-   const specie = `https://pokeapi.co/api/v2/pokemon-species/${pokemon}/`;
 
    const getFixedData = (data) => {
       poke.id = data.id;
@@ -33,16 +32,7 @@ export default function useGetPokemonDetails(pokemon) {
    const getI18nData = async (lang) => {
       const res = await fetch(single);
       const data = await res.json();
-
-      poke.description = await fetch(specie)
-         .then((res) => res.json())
-         .then((d) =>
-            d.flavor_text_entries
-               .filter((el) => el.version.name == "shield")
-               .filter((version) => version.language.name == lang)
-               .map((option) => option.flavor_text.replace(/\n|\r|\f/g, " "))
-               .toString()
-         );
+      const specie = `https://pokeapi.co/api/v2/pokemon-species/${data.species.name}/`;
 
       poke.type = await usePokeLocation(data.types[0].type.url, lang);
 
@@ -56,6 +46,16 @@ export default function useGetPokemonDetails(pokemon) {
             value: el.base_stat,
          }))
       );
+
+      poke.description = await fetch(specie)
+         .then((res) => res.json())
+         .then((d) =>
+            d.flavor_text_entries
+               .filter((el) => el.version.name == "shield")
+               .filter((version) => version.language.name == lang)
+               .map((option) => option.flavor_text.replace(/\n|\r|\f/g, " "))
+               .toString()
+         );
    };
 
    const getDetails = async () => {

@@ -24,6 +24,7 @@ router-link {
    flex-direction: column;
    justify-content: center;
    border-radius: 10px;
+   width: 304px;
 }
 .poke_name {
    background-color: white;

@@ -1,21 +1,24 @@
 <script setup>
 import useGetPokemonDetails from "../hooks/useGetPokemonDetails.js";
-import { ref, watch, watchEffect } from "vue";
+import { watchEffect, watch } from "vue";
 import { useI18n } from "vue-i18n";
 
 const props = defineProps({
    pokeName: String,
 });
-const { poke, loading } = useGetPokemonDetails(props.pokeName);
 const { t, locale } = useI18n();
+const { poke, getI18nData, loading } = useGetPokemonDetails(props.pokeName);
 
-// watchEffect(() => console.log(locale.value));
+watchEffect(() => {
+   locale.value;
+   getI18nData(locale.value);
+});
 </script>
 
 <template>
    <p v-if="loading">Loading....</p>
    <figure v-else class="poke_container">
-      <div class="poke_img-container" :class="poke.type">
+      <div class="poke_img-container" :class="poke.typeBg">
          <img
             :src="poke.avatar"
             :alt="poke.name"

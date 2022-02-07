@@ -129,6 +129,7 @@ watchEffect(() => {
    .poke_img {
       width: 100%;
       height: 100%;
+      object-fit: contain;
    }
    .poke_details {
       width: 60%;

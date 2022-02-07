@@ -3,12 +3,20 @@ import { useI18n } from "vue-i18n";
 
 const { t, locale } = useI18n();
 const langs = ["en", "es", "fr"];
+
+const storage = window.localStorage;
+const setLang = (e) => storage.setItem("lang", e.target.value);
 </script>
 
 <template>
    <section class="locale_conatainer">
       <label class="locale_label" for="locale">{{ t("label") }}</label>
-      <select class="locale_select" v-model="locale" id="locale">
+      <select
+         class="locale_select"
+         v-model="locale"
+         id="locale"
+         @change="setLang"
+      >
          <option
             class="locale_opt"
             v-for="(lang, i) in langs"

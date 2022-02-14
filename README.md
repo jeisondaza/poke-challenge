@@ -1,13 +1,11 @@
-# Prube técnica para Mi Águila
+This "pokedex" is built on the Vue.js framework in its version 3 using exclusively the new Composition API and Vite (created by Evan You, the same creator of Vuejs) as a bundler, since it is a very high performance option in terms of development experience.
 
-Este "pokedex" está construido en el framework Vue.js en su versión 3 usando exclusivamente la nueva **Composition API** y Vite (creado por Evan You, mismo creador de Vuejs) como bundler, ya que es una opción  de muy alto rendimiento en cuanto a expericiena de desarrollo.
+I used the gitflow flow for repository management.
 
-Utilié el gitflow flow para el manejor de repositorio.
+You can see the project in production at https://poke-challenge-seven.vercel.app/squirtle deployed on Vercel.
 
-Se puede ver el proyecto en produción en https://poke-challenge-seven.vercel.app/squirtle desplegado en Vercel.
+To see running the project:
 
-Para ver hacer funcionar el proyecto:
-
-1. clonar este repositorio
-2. npm install.
-3. npm run dev o npm run preview.
+clone this repository
+npm install.
+npm run dev or npm run preview.

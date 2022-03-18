@@ -6,6 +6,3 @@ You can see the project in production at https://poke-challenge-seven.vercel.app
 
 To see running the project:
 
-clone this repository
-npm install.
-npm run dev or npm run preview.
